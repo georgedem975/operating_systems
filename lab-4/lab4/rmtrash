@@ -1,0 +1,23 @@
+#!/bin/bash
+
+file=$1
+
+k=$(($(cat ~/.trash/.trash.log | wc -l)+1))
+
+if [ ! -d ~/.trash ]; then
+        echo "directory created"
+        mkdir ~/.trash
+fi
+
+if [ ! -f ~/.trash/.trash.log ]; then
+        echo "~/.trash/.trash.log"
+        touch ~/.trash/.trash.log
+fi
+
+ln $1 "~/.trash/$k";
+
+rm $1
+
+echo "$PWD/$file:$k" >> ~/.trash/.trash.log
+
+echo "$PWD/$file:$k"

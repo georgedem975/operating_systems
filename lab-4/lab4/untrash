@@ -1,0 +1,32 @@
+#!/bin/bash
+
+name=$1
+
+
+for i in $(grep "/$name" ~/.trash/.trash.log);
+do
+        full_path_dir=$(echo $i | awk -F ':' '{print $3}')
+        full_path_file=$(echo $i | awk -F ':' '{print $1}')
+
+        read -p "do you wont to return file: $full_path_file" answer
+
+        if [[ $answer == "y" ]]; then
+                if [[ -d $full_path_dir ]]; then
+                        if [[ ! -f $full_path_file ]]; then
+                                touch $full_path_file
+                                echo "full path"
+                        else
+                                read -p "enter new name: " NAME
+                                touch $NAME
+                        fi
+                else
+                        if [[ ! -f $(echo $i | awk -F ':' '{print $4}') ]]; then
+                                touch $(echo $i | awk -F ':' '{print $4}')
+                                echo "new path"
+                        else
+                                read -p "enter new name: " NAME
+                                touch $NAME
+                        fi
+                fi
+        fi
+done

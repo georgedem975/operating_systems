@@ -1,0 +1,45 @@
+#!/bin/bash
+
+path=/home/user
+
+d=$(date '+%Y%m%d')
+
+dir="$path/$d"
+
+if [ ! -d "$dir" ]; then
+        mkdir $dir
+        echo "dir created successfuly $dir"
+        cp -R /home/user/sourse/. $dir
+        ls $dir >> /home/user/backup-report
+else
+        echo $(date --date=$(ls $path | grep "^[0-9]" | sort -n | head -1) "+%Y%m%d")
+        last=$(date --date=$(ls $path | grep "^[0-9]" | sort -n | head -1) "+%Y%m%d")
+        echo $last
+        echo "dir exist"
+        distance=$(($(($(($(($last-$(date --date=$d "+%s")))/60))/60))/24))
+        if [ $distance -le 7 ]; then
+                echo "directory exist"
+                echo $last >> /home/user/backup-report
+                for f in $(ls /home/user/sourse); do
+                        if [ -f $path/$last/$f ]; then
+                                if [ $(stat -c %s $path/$last/$f) -eq $(stat -c %s $path/sourse/$f) ]; then
+                                        echo "file exist"
+                                else
+                                        touch $path/$last/$f.$d
+                                        cp $path/sourse/$f $path/$last/$f.$d
+                                        echo "$path/sourse/$f $path/$last/$f.$d" >> /home/user/backup-report
+                                fi
+                        else
+                                touch $path/$last/$f
+                                cp $path/sourse/$f $path/$last/$f
+                                echo "$path/sourse/$f" >> /home/user/backup-report
+                        fi
+                done
+        else
+                echo "create new directory"
+                mkdir "$path/$last"
+                last_path="$path/$last"
+                cp -R /home/user/sourse/. $last_path
+                ls $last_path >> /home/user/backup-report
+        fi
+fi

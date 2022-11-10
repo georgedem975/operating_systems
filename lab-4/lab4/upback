@@ -1,0 +1,11 @@
+#!/bin/bash
+
+last=$(find "/home/user/" -maxdepth 1 | grep "/[0-9]" | sort -n | tail -n 1)
+
+for f in $(ls $last)
+do
+        if [ "$(echo $f | grep -E ".[0-9]")" == "" ]; then
+                cp $last/$f /home/user/restore/$f
+                echo "done"
+        fi
+done
