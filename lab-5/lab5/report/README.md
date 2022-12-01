@@ -237,5 +237,17 @@ __Файл run.sh__
 2075 root      20   0 2641944   1.6g      0 R   6.7  89.7  19:23.50 mem.bash
 ```
 
+![13](https://github.com/georgedem975/operating_systems/blob/master/lab-5/lab5/assets/13.png)
+
+![14](https://github.com/georgedem975/operating_systems/blob/master/lab-5/lab5/assets/14.png)
+
+![15](https://github.com/georgedem975/operating_systems/blob/master/lab-5/lab5/assets/15.png)
+
+![16](https://github.com/georgedem975/operating_systems/blob/master/lab-5/lab5/assets/16.png)
+
+![17](https://github.com/georgedem975/operating_systems/blob/master/lab-5/lab5/assets/17.png)
+
+![18](https://github.com/georgedem975/operating_systems/blob/master/lab-5/lab5/assets/18.png)
+
 Проводите наблюдения и фиксируйте их в отчете до аварийной остановки последнего из двух скриптов и их исчезновения из перечня процессов в ```top```.
 Посмотрите с помощью команды ```dmesg | grep "mem[2]*.bash"``` последние записи о скриптах в системном журнале и зафиксируйте их в отчете. Также зафиксируйте значения в последних строках файлов ```report.log``` и ```report2.log```.
