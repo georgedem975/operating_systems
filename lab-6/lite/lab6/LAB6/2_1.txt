@@ -1,0 +1,1 @@
+forfiles /S /M *.* /C "cmd /c echo The extension of @file is C:\Users\user\Desktop\LAB6"
